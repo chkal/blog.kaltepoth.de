@@ -1,0 +1,110 @@
+/* Basic Layout */
+
+.container {
+
+  .header {
+  
+    /* position */
+    margin: 10px 0 5px 0;
+  
+    /* block */
+    border-radius: 20px;
+    background-color: #EBFFF4;
+    padding: 50px;
+  
+    a {
+    
+      /* font */
+      font-size: 30px;
+      font-weight: bold;
+      color: #999;
+      
+    }
+  
+  }
+  
+  .footer {
+    border-radius: 20px;
+    background-color: #EBFFF4;
+    text-align: center;
+  }
+  
+  .sidebar {
+  
+    .picture {
+      text-align: center;
+      margin: 8px 0;
+    }
+  
+    h1 {
+      font-size: 16px;
+      background-color: gray;
+      color: white;
+      padding: 0 10px 0 10px;
+      margin: 25px 0 10px 0;
+      line-height: 40px;
+      border-radius: 10px;
+    }
+    
+    p {
+      margin: 0 10px 0 10px;
+    }
+    
+    .atom-icon {
+      margin: 2em 0 0 0;
+      text-align: center;
+    }
+  
+  }
+
+}
+
+/* blog posts */
+.post {
+
+  margin: 10px 0 0 0;
+
+  .preface {
+  
+    /* date */
+    .date {
+      color: gray;
+    }
+    
+    /* header */
+    h1 {
+      font-size: 25px;
+      margin: 0 0 0 0;
+    }
+    
+    .tags {
+      font-weight: bold;
+      margin: 0 0 8px 0;
+    }
+    
+  }
+  
+  .content {
+
+    margin: 8px 0 0 0;
+
+    .prettyprint {
+       overflow: auto;
+       padding: 10px;
+    }
+  
+  }
+
+  .comments {
+
+    margin: 3em 0 0 0;
+    
+  }
+  
+}
+
+/* Common stuff */
+
+.calign {
+  text-align: center;
+}

@@ -1,0 +1,65 @@
+!!!5
+%html
+  %head
+    %meta{ :charset=>'utf-8' }
+    %title Christian Kaltepoth's Blog
+    %meta{ :name=>'viewport', :content=>'width=device-width, initial-scale=1.0' }
+    %link{ :rel=>'stylesheet', :type=>'text/css', :href=>"/stylesheets/bootstrap.css" }
+    %link{ :rel=>'stylesheet', :type=>'text/css', :href=>"/stylesheets/prettify.css" }
+    %link{ :rel=>'stylesheet', :type=>'text/css', :href=>"/stylesheets/styles.css" }
+    %link{ :rel=>'alternate', :type=>'application/atom+xml', :href=>"/feed.atom", :title=>'Atom Feed' }
+    /[if lt IE 9]
+      %script{ :type=>'text/javascript', :src=>'//html5shim.googlecode.com/svn/trunk/html5.js' }
+    - if site.google_analytics
+      = google_analytics_async
+  %body{ :onload => 'prettyPrint()' }
+    .container
+      .row
+        .span12
+          .header
+            %a{ :href=>'/' }
+              Christian Kaltepoth's Blog
+      .row
+        .span8
+          ~ content
+        .span4.sidebar
+          %h1
+            About me
+          .picture
+            %img{ :src=>'/images/chkal.jpg', :alt=>'picture', :width=>'100' }
+          %p.calign
+            Christian Kaltepoth<br/>
+            Senior Software Developer<br/>
+            <a href="http://www.ingenit.com/">ingenit GmbH & Co. KG</a>
+          %h1
+            Contact
+          %p
+            %ul
+              %li
+                Twitter: <a href="http://twitter.com/chkal">@chkal</a>
+              %li
+                Google+: <a href="https://plus.google.com/u/0/105317683054583400251">chkal</a>
+              %li
+                GitHub: <a href="https://github.com/chkal">chkal</a>
+          %h1
+            Projects
+          %p
+            %ul
+              %li
+                <a href="http://www.togglz.org/">Togglz</a> - Feature Flags for Java
+              %li
+                <a href="http://ocpsoft.org/rewrite/">Rewrite</a> - Next generation URL rewriting
+              %li
+                <a href="http://ocpsoft.org/prettyfaces/">PrettyFaces</a> - Pretty URLs for JSF
+              %li
+                <a href="http://www.criteria4jpa.org">Criteria4JPA</a> - Hibernate Criteria for JPA
+          %p.atom-icon
+            %a{ :href=>"/feed.atom" }
+              %img{ :src=>'/images/atom.png', :alt=>'feed' }
+      .row
+        .span12
+          .footer
+            &copy; 2012 - Christian Kaltepoth
+    %script{ :type=>'text/javascript', :src=>"/javascripts/bootstrap.js" }
+    %script{ :type=>'text/javascript', :src=>"/javascripts/prettify.js" }
+    

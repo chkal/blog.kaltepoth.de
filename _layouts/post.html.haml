@@ -1,0 +1,23 @@
+---
+layout: base
+---
+
+.post
+  .preface
+    .date
+      = page.date.strftime( '%d. %B %Y' )
+    %h1
+      %a{:href=>page.url}
+        = page.title
+    .tags
+      Tags:
+      - for tag in page.tags
+        - unless tag.nil?
+          %a{:href=>tag.primary_page.url}
+            = tag
+  .content
+    ~page.content
+  - if site.disqus
+    .comments
+      = page.disqus_comments
+ 

@@ -1,0 +1,69 @@
+---
+title: "Google Analytics and Maven Project Sites"
+author: 'Christian Kaltepoth'
+layout: post
+tags: [ maven, google ]
+---
+
+%p
+  I recently looked for a way to integrate the <a href="http://www.google.com/analytics/">Google Analytics</a> tracking 
+  code into the project site of my current spare time project <a href="http://www.criteria4jpa.org/">Criteria4JPA</a>. 
+  I'm using the <a href="http://maven.apache.org/plugins/maven-site-plugin/">Maven Site Plugin</a> to automatically 
+  build the project page because it makes the process of creating a site very easy.
+
+%p
+  After some time I realized that there seems to be no easy way to do this. Somebody on the maven-user list 
+  <a href="http://mail-archives.apache.org/mod_mbox/maven-users/200706.mbox/%3C7281ca710706291341v41a82017h25b76a314fc8b4bc@mail.gmail.com%3E">proposed</a> 
+  to create a copy of the original site template and modify it to include the necessary JavaScript in the page header. 
+  But I think that this solution is much to complicated for such a simple job. I also found an 
+  <a href="http://jira.codehaus.org/browse/MSITE-161">existing JIRA issue</a> describing the problem but it 
+  is still unresolved.
+
+%p
+  But after much more searching I discovered a very simple and elegant way to get the Google Analytics tracking code 
+  into the maven site. I found the hint on the doxia-dev mailing list. Someone talked about a 
+  <a href="http://www.nabble.com/head-element-in-site.xml--td12537293.html">mysterious &lt;head&gt; element</a> that 
+  can be used in the site.xml descriptor. The JIRA issue <a href="http://jira.codehaus.org/browse/DOXIA-150">DOXIA-150</a> 
+  seemed to prove the existence of this feature.
+
+%p
+  I tried it and it worked. See the site.xml file of <a href="http://www.criteria4jpa.org/">Criteria4JPA</a> for 
+  an example:
+
+%pre(class="prettyprint lang-xml")
+  :plain
+    &lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;
+    &lt;project name="Criteria4JPA"&gt;
+    
+      &lt;body&gt;
+    
+        &lt;head&gt;
+          &lt;!-- Google Analytics - Start --&gt;
+          &lt;script type="text/javascript"&gt;
+          var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+          document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          &lt;/script&gt;
+          &lt;script type="text/javascript"&gt;
+          try {
+          var pageTracker = _gat._getTracker("UA-1234567-8");
+          pageTracker._trackPageview();
+          } catch(err) {}&lt;/script&gt;      
+          &lt;!-- Google Analytics - End --&gt;
+        &lt;/head&gt;
+    
+        &lt;!-- more stuff --&gt;
+    
+      &lt;/body&gt;
+    &lt;/project&gt;
+
+%p
+  As you can see adding the tracking code is very easy. Just place a &lt;head&gt; element inside the body 
+  and copy the Google Analytics code in there. The default JavaScript code you get from Google Analytics is 
+  already correctly escaped so you can copy and paste it into the XML descriptor without problems.
+
+%p
+  I don't know for sure which versions of Maven, Doxia and the Site Plugin are required for this but I can confirm 
+  that Maven 2.2.0 together with the Maven Site Plugin 2.0-beta-7 works.
+
+%p
+  Happy tracking... :-)
