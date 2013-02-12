@@ -1,0 +1,61 @@
+---
+title: "Building JBoss AS 7.1.3.Final"
+author: 'Christian Kaltepoth'
+layout: post
+tags: [ jboss, as7 ]
+---
+
+%p
+  There have been recently much discussion about the 
+  <a href="https://community.jboss.org/thread/197780">missing binary downloads</a>
+  of JBoss AS 7.1.2.Final and 7.1.3.Final. 
+  To keep the long story short, here are just the most important facts: 
+  The latest version of AS7 available on
+  the <a href="http://www.jboss.org/jbossas/downloads/">download page</a> is 7.1.1.Final 
+  which has been release about a year ago.
+  But if you have a look at the <a href="https://github.com/jbossas/jboss-as/tags">AS7 GitHub repository</a>,
+  you will notice tags for 7.1.2.Final and 7.1.3.Final.
+
+%p
+  To be honest, I don't fully understand the reason for this. But that's the current situation.
+  So if you want JBoss AS 7.1.3.Final, you have to build it yourself. 
+  
+%p
+  It seems like most people think that the process of compiling AS7 is difficult. 
+  But it is not. It is actually pretty straight forward and only takes about 10 minutes.
+
+%p
+  The first step is of cause to download the sources. Fortunately GitHub provides downloadable 
+  ZIP files for all tags. 
+
+%pre(class="prettyprint nocode")
+  :plain
+    $ wget https://github.com/jbossas/jboss-as/archive/7.1.3.Final.zip
+    $ unzip 7.1.3.Final.zip
+    $ cd jboss-as-7.1.3.Final/
+
+%p
+  Now you have to start the build by entering this command: 
+
+%pre(class="prettyprint nocode")
+  :plain
+    $ ./build.sh -DskipTests -Drelease=true install
+
+%p
+  This command requires some explanation. The <code>build.sh</code> file is a helper script that
+  performs some additional checks to ensure you are using the correct Maven version. I also recommend
+  to use <code>-DskipTests</code> to skip the test suite which will reduce the overall build time dramatically.
+  You also have to set <code>-Drelease=true</code> to ensure the build creates the distribution archives.
+
+%p
+  The compilation took about 9 minutes on my box. After the build completed you will find the ZIP distribution
+  in the <code>dist/target</code> directory:
+
+%pre(class="prettyprint nocode")
+  :plain
+    $ ls -1 dist/target/*.zip
+    dist/target/jboss-as-7.1.3.Final-src.zip
+    dist/target/jboss-as-7.1.3.Final.zip
+
+%p
+  That's all. Simple, isn't it? So you see there is no reason for not building AS7 yourself. :)
