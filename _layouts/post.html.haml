@@ -15,6 +15,12 @@ layout: base
         - unless tag.nil?
           %a{:href=>tag.primary_page.url}
             = tag
+    .dzone
+      <script type="text/javascript">var dzone_url = '#{site.base_url}#{page.url}';</script>
+      <script type="text/javascript">var dzone_title = '#{page.title}';</script>
+      <script type="text/javascript">var dzone_blurb = '#{page.title}';</script>
+      <script type="text/javascript">var dzone_style = '2';</script>
+      <script language="javascript" src="http://widgets.dzone.com/links/widgets/zoneit.js"></script>
   .content
     ~page.content
   - if site.disqus
