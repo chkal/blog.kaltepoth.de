@@ -3,4 +3,14 @@ rvm: 2.1.0
 install:
   - gem install awestruct
 script:
-  - awestruct -P production 
+  - awestruct -P production
+deploy:
+  provider: s3
+  access_key_id: AKIAJSUGYSKIRPOS2QVA
+  secret_access_key:
+    secure: lHyNO1neEwtFhckc2Wme5a92ftYt8BWefOPpS9BePnbak99/h4tQxmRBjaepMwDxYobPHewormf5rf9T1dY7kFuipo23l7yoVH69kTTc6+GaB3JyQLlb00EtEaoxdbusDxFec0JHTk9K1e/V2KdbUzGMeANDBcFpqawy9NuEwk4=
+  bucket: blog.kaltepoth.de
+  local-dir: _site
+  acl: public_read
+  on:
+    repo: chkal/blog.kaltepoth.de
