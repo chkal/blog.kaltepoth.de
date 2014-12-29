@@ -10,6 +10,7 @@ deploy:
   secret_access_key:
     secure: lHyNO1neEwtFhckc2Wme5a92ftYt8BWefOPpS9BePnbak99/h4tQxmRBjaepMwDxYobPHewormf5rf9T1dY7kFuipo23l7yoVH69kTTc6+GaB3JyQLlb00EtEaoxdbusDxFec0JHTk9K1e/V2KdbUzGMeANDBcFpqawy9NuEwk4=
   bucket: blog.kaltepoth.de
+  skip_cleanup: true
   local-dir: _site
   acl: public_read
   on:
