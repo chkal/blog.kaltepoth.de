@@ -5,9 +5,7 @@ profiles:
     disqus_developer: true
   production:
     base_url: http://blog.kaltepoth.de
-    google_analytics: UA-7295879-9
+    google_analytics: 
+      account: UA-7295879-9
     disqus: chkal-blog
     disqus_generate_id: true
-    deploy:
-      host: kaltepoth.de
-      path: /home/www/blog.kaltepoth.de/htdocs
