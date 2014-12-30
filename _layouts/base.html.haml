@@ -2,8 +2,12 @@
 %html
   %head
     %meta{ :charset=>'utf-8' }
-    %title Christian Kaltepoth's Blog
+    %title #{site.title} - #{page.title}
     %meta{ :name=>'viewport', :content=>'width=device-width, initial-scale=1.0' }
+    %meta{ :name=>'twitter:card', :content=>'summary' }
+    %meta{ :name=>'twitter:site', :content=>'@chkal' }
+    %meta{ :name=>'twitter:title', :content=>page.title }
+    %meta{ :name=>'twitter:description', :content=>site.title }
     %link{ :rel=>'stylesheet', :type=>'text/css', :href=>"/stylesheets/bootstrap.css" }
     %link{ :rel=>'stylesheet', :type=>'text/css', :href=>"/stylesheets/prettify.css" }
     %link{ :rel=>'stylesheet', :type=>'text/css', :href=>"/stylesheets/styles.css" }
