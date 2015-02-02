@@ -1,6 +1,6 @@
 language: ruby
 install:
-  - gem install awestruct
+  - gem install awestruct less
 script:
   - awestruct -P production
 deploy:
