@@ -8,7 +8,7 @@
     %meta{ :name=>'twitter:site', :content=>'@chkal' }
     %meta{ :name=>'twitter:title', :content=>page.title }
     %meta{ :name=>'twitter:description', :content=>site.title }
-    %link{ :rel=>'stylesheet', :type=>'text/css', :href=>"/stylesheets/bootstrap.css" }
+    %link{ :rel=>'stylesheet', :type=>'text/css', :href=>"/vendor/bootstrap/css/bootstrap.min.css" }
     %link{ :rel=>'stylesheet', :type=>'text/css', :href=>"/stylesheets/prettify.css" }
     %link{ :rel=>'stylesheet', :type=>'text/css', :href=>"/stylesheets/styles.css" }
     %link{ :rel=>'alternate', :type=>'application/atom+xml', :href=>"/feed.atom", :title=>'Atom Feed' }
@@ -19,14 +19,14 @@
   %body{ :onload => 'prettyPrint()' }
     .container
       .row
-        .span12
+        .col-md-12
           .header
             %a{ :href=>'/' }
               Christian Kaltepoth's Blog
       .row
-        .span8
+        .col-md-8
           ~ content
-        .span4.sidebar
+        .col-md-4.sidebar
           %h1
             About me
           .picture
@@ -87,9 +87,9 @@
             %a{ :href=>"/feed.atom" }
               %img{ :src=>'/images/atom.png', :alt=>'feed' }
       .row
-        .span12
+        .col-md-12
           .footer
             &copy; 2012 - Christian Kaltepoth
-    %script{ :type=>'text/javascript', :src=>"/javascripts/bootstrap.js" }
+    %script{ :type=>'text/javascript', :src=>"/vendor/bootstrap/js/bootstrap.min.js" }
     %script{ :type=>'text/javascript', :src=>"/javascripts/prettify.js" }
     
