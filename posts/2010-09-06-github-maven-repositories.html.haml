@@ -24,31 +24,34 @@ tags: [ maven, git ]
   The first step is to create a separate clone of your GitHub repository in a directory next to your 
   primary local repository:
 
-%pre(class="prettyprint lang-sh")
-  :plain
-    $ pwd
-    /home/ck/workspace/jsf-maven-util
-    $ cd ..
-    $ git clone git@github.com:chkal/jsf-maven-util.git jsf-maven-util-pages
-    $ cd jsf-maven-util-pages
+%pre(class="nohighlight")
+  %code
+    :plain
+      $ pwd
+      /home/ck/workspace/jsf-maven-util
+      $ cd ..
+      $ git clone git@github.com:chkal/jsf-maven-util.git jsf-maven-util-pages
+      $ cd jsf-maven-util-pages
 
 %p
   The <i>GitHub Pages</i> web site must be created as a branch named <i>gh-pages</i> in your repository. 
   So lets create this branch and empty it. Refer to the <a href="http://pages.github.com/">GitHub Pages Manual</a> 
   if you are interested in the exact meaning of these commands.
 
-%pre(class="prettyprint lang-sh")
-  :plain
-    $ git symbolic-ref HEAD refs/heads/gh-pages
-    $ rm .git/index
-    $ git clean -fdx
+%pre(class="nohighlight")
+  %code
+    :plain
+      $ git symbolic-ref HEAD refs/heads/gh-pages
+      $ rm .git/index
+      $ git clean -fdx
 
 %p
   We will place the Maven repository in a subdirectory of this new branch:
 
-%pre(class="prettyprint lang-sh")
-  :plain
-    $ mkdir repository
+%pre(class="nohighlight")
+  %code
+    :plain
+      $ mkdir repository
 
 %p
   We also want to have a pretty directory listing. Unfortunately GitHub Pages doesn't have native support for this. So we will create our own directory listing with a simple bash script.
@@ -57,48 +60,52 @@ tags: [ maven, git ]
   Create a file named <a href="http://github.com/chkal/jsf-maven-util/blob/gh-pages/update-directory-index.sh">update-directory-index.sh</a> in the root of the new branch (next to the <i>repository</i> directory). This script will walk recursively into the <i>repository</i> directory and create <i>index.html</i> files in each subdirectory. Please be careful when using this script as it overwrites all exiting <i>index.html</i> files it finds.
 
 
-%pre(class="prettyprint lang-sh")
-  :plain
-    #!/bin/bash
-    
-    for DIR in $(find ./repository -type d); do
-      (
-        echo -e "&lt;html&gt;\n&lt;body&gt;\n&lt;h1&gt;Directory listing&lt;/h1&gt;\n&lt;hr/&gt;\n&lt;pre&gt;"
-        ls -1pa "${DIR}" | grep -v "^\./$" | grep -v "^index\.html$" 
-            | awk '{ printf "&lt;a href=\"%s\"&gt;%s&lt;/a&gt;\n",$1,$1 }'
-        echo -e "&lt;/pre&gt;\n&lt;/body&gt;\n&lt;/html&gt;"
-      ) &gt; "${DIR}/index.html"
-    done
+%pre(class="bash")
+  %code
+    :plain
+      #!/bin/bash
+      
+      for DIR in $(find ./repository -type d); do
+        (
+          echo -e "&lt;html&gt;\n&lt;body&gt;\n&lt;h1&gt;Directory listing&lt;/h1&gt;\n&lt;hr/&gt;\n&lt;pre&gt;"
+          ls -1pa "${DIR}" | grep -v "^\./$" | grep -v "^index\.html$" 
+              | awk '{ printf "&lt;a href=\"%s\"&gt;%s&lt;/a&gt;\n",$1,$1 }'
+          echo -e "&lt;/pre&gt;\n&lt;/body&gt;\n&lt;/html&gt;"
+        ) &gt; "${DIR}/index.html"
+      done
 
 %p
   Congratulations! Your repository is ready. Now you will have to modify the <i>distributionManagement</i> section of your <i>pom.xml</i> to let Maven deploy your artifacts to the new repository. Go back to your primary repository clone and edit your <i>pom.xml</i>:
 
-%pre(class="prettyprint lang-xml")
-  :plain
-    &lt;distributionManagement&gt;
-      &lt;repository&gt;
-        &lt;id&gt;gh-pages&lt;/id&gt;
-        &lt;url&gt;file:///${basedir}/../jsf-maven-util-pages/repository/&lt;/url&gt;
-      &lt;/repository&gt;
-    &lt;/distributionManagement&gt;
+%pre(class="xml")
+  %code
+    :plain
+      &lt;distributionManagement&gt;
+        &lt;repository&gt;
+          &lt;id&gt;gh-pages&lt;/id&gt;
+          &lt;url&gt;file:///${basedir}/../jsf-maven-util-pages/repository/&lt;/url&gt;
+        &lt;/repository&gt;
+      &lt;/distributionManagement&gt;
 
 %p
   Now you are ready to deploy your first artifact to the repository: 
 
-%pre(class="prettyprint nocode")
-  :plain
-    $ mvn -DperformRelease=true clean deploy
+%pre(class="nohighlight")
+  %code
+    :plain
+      $ mvn -DperformRelease=true clean deploy
 
 %p
   You will see that Maven copies the artifacts to your local checkout of the GitHub Pages branch. After Maven has finished you'll have to update the directory listings, commit the changes made to the repository and push them to GitHub:
 
-%pre(class="prettyprint lang-sh")
-  :plain
-    $ cd ../jsf-maven-util-pages/
-    $ ./update-directory-index.sh
-    $ git add -A
-    $ git commit -m "Deployed my first artifact to GitHub"
-    $ git push origin gh-pages
+%pre(class="bash")
+  %code
+    :plain
+      $ cd ../jsf-maven-util-pages/
+      $ ./update-directory-index.sh
+      $ git add -A
+      $ git commit -m "Deployed my first artifact to GitHub"
+      $ git push origin gh-pages
 
 %p
   Now let's check the result. Please note that the first publish may take some time to appear on the web server.
@@ -113,13 +120,14 @@ tags: [ maven, git ]
 %p
   If you want to use your repository in another project, just add the following repository entry to the <i>pom.xml</i>:
 
-%pre(class="prettyprint lang-xml")
-  :plain
-    &lt;repository&gt;
-      &lt;id&gt;jsf-maven-util-repo&lt;/id&gt;
-      &lt;name&gt;jsf-maven-util repository on GitHub&lt;/name&gt;
-      &lt;url&gt;http://chkal.github.com/jsf-maven-util/repository/&lt;/url&gt;
-    &lt;/repository&gt;
+%pre(class="xml")
+  %code
+    :plain
+      &lt;repository&gt;
+        &lt;id&gt;jsf-maven-util-repo&lt;/id&gt;
+        &lt;name&gt;jsf-maven-util repository on GitHub&lt;/name&gt;
+        &lt;url&gt;http://chkal.github.com/jsf-maven-util/repository/&lt;/url&gt;
+      &lt;/repository&gt;
 
 %p
   As you can see deploying Maven artifacts to GitHub is very simple. You can also use a similar approach to publish your Maven generated project site to GitHub. But that's a different story.... :-)

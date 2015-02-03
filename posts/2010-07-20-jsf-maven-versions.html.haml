@@ -26,46 +26,50 @@ tags: [ maven, jsf ]
 %p
   This example shows how to display the version of a web application in its page title.
 
-%pre(class="prettyprint lang-xml")
-  :plain
-    &lt;head&gt;
-      &lt;title&gt;
-        My Application \#{maven.version['com.example.myapp:myapp-webapp']}
-      &lt;/title&gt;
-    &lt;/head&gt;  
+%pre(class="html")
+  %code
+    :plain
+      &lt;head&gt;
+        &lt;title&gt;
+          My Application \#{maven.version['com.example.myapp:myapp-webapp']}
+        &lt;/title&gt;
+      &lt;/head&gt;  
 
 %p
   You can also display the version of any of your project's dependencies as long as it includes a 
   <i>pom.properties</i> in its archive:
 
-%pre(class="prettyprint lang-xml")
-  :plain
-    &lt;p&gt;
-      powered by Weld \#{maven.version['org.jboss.weld:weld-core']}  
-    &lt;/p&gt;
+%pre(class="html")
+  %code
+    :plain
+      &lt;p&gt;
+        powered by Weld \#{maven.version['org.jboss.weld:weld-core']}  
+      &lt;/p&gt;
 
 %p
   If you are interested in using this feature in your own project, add the following repository to 
   your <i>pom.xml</i>:
 
-%pre(class="prettyprint lang-xml")
-  :plain
-    &lt;repository&gt;
-      &lt;id&gt;jsf-maven-util-repo&lt;/id&gt;
-      &lt;name&gt;jsf-maven-util Repository&lt;/name&gt;
-      &lt;url&gt;http://chkal.github.com/jsf-maven-util/repository/&lt;/url&gt;
-    &lt;/repository&gt;
+%pre(class="xml")
+  %code
+    :plain
+      &lt;repository&gt;
+        &lt;id&gt;jsf-maven-util-repo&lt;/id&gt;
+        &lt;name&gt;jsf-maven-util Repository&lt;/name&gt;
+        &lt;url&gt;http://chkal.github.com/jsf-maven-util/repository/&lt;/url&gt;
+      &lt;/repository&gt;
 
 %p
   Then add the following dependency to your project:
 
-%pre(class="prettyprint lang-xml")
-  :plain
-    &lt;dependency&gt;
-      &lt;groupId&gt;de.chkal.jsf&lt;/groupId&gt;
-      &lt;artifactId&gt;jsf-maven-util&lt;/artifactId&gt;
-      &lt;version&gt;1.1&lt;/version&gt;
-    &lt;/dependency&gt;
+%pre(class="xml")
+  %code
+    :plain
+      &lt;dependency&gt;
+        &lt;groupId&gt;de.chkal.jsf&lt;/groupId&gt;
+        &lt;artifactId&gt;jsf-maven-util&lt;/artifactId&gt;
+        &lt;version&gt;1.1&lt;/version&gt;
+      &lt;/dependency&gt;
 
 %p
   I pushed the source to a <a href="http://github.com/chkal/jsf-maven-util">GitHub</a> repository. 

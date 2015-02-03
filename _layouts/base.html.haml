@@ -9,14 +9,14 @@
     %meta{ :name=>'twitter:title', :content=>page.title }
     %meta{ :name=>'twitter:description', :content=>site.title }
     %link{ :rel=>'stylesheet', :type=>'text/css', :href=>"/vendor/bootstrap/css/bootstrap.min.css" }
-    %link{ :rel=>'stylesheet', :type=>'text/css', :href=>"/stylesheets/prettify.css" }
+    %link{ :rel=>'stylesheet', :type=>'text/css', :href=>"/vendor/highlight/styles/default.css" }
     %link{ :rel=>'stylesheet', :type=>'text/css', :href=>"/stylesheets/styles.css" }
     %link{ :rel=>'alternate', :type=>'application/atom+xml', :href=>"/feed.atom", :title=>'Atom Feed' }
     /[if lt IE 9]
       %script{ :type=>'text/javascript', :src=>'//html5shim.googlecode.com/svn/trunk/html5.js' }
     - if site.google_analytics
       = google_analytics
-  %body{ :onload => 'prettyPrint()' }
+  %body
     .container
       .row
         .col-md-12
@@ -91,5 +91,7 @@
           .footer
             &copy; 2012 - Christian Kaltepoth
     %script{ :type=>'text/javascript', :src=>"/vendor/bootstrap/js/bootstrap.min.js" }
-    %script{ :type=>'text/javascript', :src=>"/javascripts/prettify.js" }
+    %script{ :type=>'text/javascript', :src=>"/vendor/highlight/highlight.pack.js" }
+    %script{ :type=>'text/javascript' }
+      hljs.initHighlightingOnLoad();
     

@@ -17,9 +17,10 @@ tags: [ java, eclipse, tptp, ubuntu ]
 %p
   After installing the the features "TPTP Tracing and Profiling Tools Project" and "TPTP Profiling for Web applications" from the Ganymede update site I restarted Eclipse and tried to profile a simple web application via "Profile as -&gt; Profile on Server". Unfortunately this failed with:</p>
 
-%pre(class="prettyprint nocode")
-  :plain
-    [Error: FATAL ERROR: JPIAgent can't load ACCollector]
+%pre(class="nohighlight")
+  %code
+    :plain
+      [Error: FATAL ERROR: JPIAgent can't load ACCollector]
 
 
 %h3
@@ -31,18 +32,20 @@ tags: [ java, eclipse, tptp, ubuntu ]
 %p
   To start the Agent Controller from the command line you must find the directory of the Agent Controller bundle. For my Ganymede installation the process looks like this:
 
-%pre(class="prettyprint nocode")
-  :plain
-    $ cd plugins/org.eclipse.tptp.platform.ac.linux_*/agent_controller/bin
-    $ ./ACServer
-    ./ACServer: error while loading shared libraries: libtptpUtils.so.4: cannot open shared object file: No such file or directory
+%pre(class="nohighlight")
+  %code
+    :plain
+      $ cd plugins/org.eclipse.tptp.platform.ac.linux_*/agent_controller/bin
+      $ ./ACServer
+      ./ACServer: error while loading shared libraries: libtptpUtils.so.4: cannot open shared object file: No such file or directory
 
 %p
   Your first try will probably fail like in this example because of a missing shared library. The library <i>libtptpUtils</i> residents in the library directory of the agent controller. Eclipse will take care of setting the corresponding paths but as we are trying to start the Agent Controller from the command line, we have to perform this step to temporarily fix this problem for our test:
 
-%pre(class="prettyprint nocode")
-  :plain
-    $ export LD_LIBRARY_PATH=../lib
+%pre(class="nohighlight")
+  %code
+    :plain
+      $ export LD_LIBRARY_PATH=../lib
 
 %p
   If you are lucky, the Agent Controller now starts without any problems. But on my systems the execution failed for different reasons described in the following sections.
@@ -54,10 +57,11 @@ tags: [ java, eclipse, tptp, ubuntu ]
 %p
   There seems to be a problem with symlink creation during the installation of the Agent Controller bundle. This bug showed up with Ubuntu 7.04 but not with Ubuntu 8.10.
 
-%pre(class="prettyprint nocode")
-  :plain
-    $ ./ACServer
-    ./ACServer: error while loading shared libraries: libtptpUtils.so.4: cannot open shared object file: File too short
+%pre(class="nohighlight")
+  %code
+    :plain
+      $ ./ACServer
+      ./ACServer: error while loading shared libraries: libtptpUtils.so.4: cannot open shared object file: File too short
 
 %p
   On my system there was a regular file named <i>libtptpUtils.so.4</i> which contained only the string <i>libtptpUtils.so.4.5.0</i>. Instead of creating symlinks the installation process seemed to create regular files which contain the name of the referenced file.
@@ -65,23 +69,24 @@ tags: [ java, eclipse, tptp, ubuntu ]
 %p
   I fixed the problem by manually removing the broken files and creating the symlinks:
 
-%pre(class="prettyprint nocode")
-  :plain
-    $ rm libtptpUtils.so libtptpUtils.so.4
-    $ ln -s libtptpUtils.so.4.5.0 libtptpUtils.so.4
-    $ ln -s libtptpUtils.so.4 libtptpUtils.so
-    
-    $ rm libxerces-c.so libxerces-c.so.26
-    $ ln -s libxerces-c.so.26.0 libxerces-c.so.26
-    $ ln -s libxerces-c.so.26 libxerces-c.so
-    
-    $ rm libxerces-depdom.so libxerces-depdom.so.26
-    $ ln -s libxerces-depdom.so.26.0 libxerces-depdom.so.26
-    $ ln -s libxerces-depdom.so.26 libxerces-depdom.so
-    
-    $ rm libtransportSupport.so libtransportSupport.so.4
-    $ ln -s libtransportSupport.so.4.5.0 libtransportSupport.so.4
-    $ ln -s libtransportSupport.so.4 libtransportSupport.so
+%pre(class="nohighlight")
+  %code
+    :plain
+      $ rm libtptpUtils.so libtptpUtils.so.4
+      $ ln -s libtptpUtils.so.4.5.0 libtptpUtils.so.4
+      $ ln -s libtptpUtils.so.4 libtptpUtils.so
+      
+      $ rm libxerces-c.so libxerces-c.so.26
+      $ ln -s libxerces-c.so.26.0 libxerces-c.so.26
+      $ ln -s libxerces-c.so.26 libxerces-c.so
+      
+      $ rm libxerces-depdom.so libxerces-depdom.so.26
+      $ ln -s libxerces-depdom.so.26.0 libxerces-depdom.so.26
+      $ ln -s libxerces-depdom.so.26 libxerces-depdom.so
+      
+      $ rm libtransportSupport.so libtransportSupport.so.4
+      $ ln -s libtransportSupport.so.4.5.0 libtransportSupport.so.4
+      $ ln -s libtransportSupport.so.4 libtransportSupport.so
 
 %p
   Surprisingly this problem only showed up on my first try getting Eclipse and the TPTP Profiler to work. I tried to reproduce the problem with a clean Eclipse installation while working on this blog post. But the second time all symlinks were created successfully. This makes me suspect that the bug is fixed in the current TPTP releases.
@@ -92,10 +97,11 @@ tags: [ java, eclipse, tptp, ubuntu ]
 %p
   The Ubuntu 8.10 box showed another problem, that didn't occur on my old Ubuntu 7.04 installation:
 
-%pre(class="prettyprint nocode")
-  :plain
-    $./ACServer
-    ./ACServer: error while loading shared libraries: libstdc++-libc6.2-2.so.3: cannot open shared object file: No such file or directory
+%pre(class="nohighlight")
+  %code
+    :plain
+      $./ACServer
+      ./ACServer: error while loading shared libraries: libstdc++-libc6.2-2.so.3: cannot open shared object file: No such file or directory
 
 %p
   The Agent Controller requires an old libstdc++ library that wasn't installed on Ubuntu 8.10. Fixing this problem depends on the Linux
@@ -104,31 +110,33 @@ tags: [ java, eclipse, tptp, ubuntu ]
   package containing this file. I fixed the problem by manually
   downloading a package from an older Ubuntu release:
 
-%pre(class="prettyprint nocode")
-  :plain
-    $ cd /tmp
-    $ wget "http://de.archive.ubuntu.com/ubuntu/pool/universe/g/gcc-2.95/libstdc++2.10-glibc2.2_2.95.4-24_i386.deb"
-    $ sudo dpkg -i libstdc++2.10-glibc2.2_2.95.4-24_i386.deb
+%pre(class="nohighlight")
+  %code
+    :plain
+      $ cd /tmp
+      $ wget "http://de.archive.ubuntu.com/ubuntu/pool/universe/g/gcc-2.95/libstdc++2.10-glibc2.2_2.95.4-24_i386.deb"
+      $ sudo dpkg -i libstdc++2.10-glibc2.2_2.95.4-24_i386.deb
 
 %p
   Depending on your system there might by other libraries missing. The following list contains all shared library dependenies of the Agent Controller binary:
 
-%pre(class="prettyprint nocode")
-  :plain
-    $ ldd ACServer
-    &nbsp;&nbsp; linux-gate.so.1 =&gt;&nbsp; (0xffffe000)
-    &nbsp;&nbsp; libtptpUtils.so.4 =&gt; ../lib/libtptpUtils.so.4 (0xb7f72000)
-    &nbsp;&nbsp; libtptpLogUtils.so.4 =&gt; ../lib/libtptpLogUtils.so.4 (0xb7f65000)
-    &nbsp;&nbsp; libtptpConfig.so.4 =&gt; ../lib/libtptpConfig.so.4 (0xb7f4b000)
-    &nbsp;&nbsp; libprocessControlUtil.so.4 =&gt; ../lib/libprocessControlUtil.so.4 (0xb7f46000)
-    &nbsp;&nbsp; libxerces-c.so.26 =&gt; ../lib/libxerces-c.so.26 (0xb7b3f000)
-    &nbsp;&nbsp; libpthread.so.0 =&gt; /lib/tls/i686/cmov/libpthread.so.0 (0xb7b12000)
-    &nbsp;&nbsp; libc.so.6 =&gt; /lib/tls/i686/cmov/libc.so.6 (0xb79d1000)
-    &nbsp;&nbsp; libdl.so.2 =&gt; /lib/tls/i686/cmov/libdl.so.2 (0xb79cd000)
-    &nbsp;&nbsp; libuuid.so.1 =&gt; /lib/libuuid.so.1 (0xb79ca000)
-    &nbsp;&nbsp; libstdc++-libc6.2-2.so.3 =&gt; /usr/lib/libstdc++-libc6.2-2.so.3 (0xb7982000)
-    &nbsp;&nbsp; libm.so.6 =&gt; /lib/tls/i686/cmov/libm.so.6 (0xb795a000)
-    &nbsp;&nbsp; /lib/ld-linux.so.2 (0xb7f95000)
+%pre(class="nohighlight")
+  %code
+    :plain
+      $ ldd ACServer
+      &nbsp;&nbsp; linux-gate.so.1 =&gt;&nbsp; (0xffffe000)
+      &nbsp;&nbsp; libtptpUtils.so.4 =&gt; ../lib/libtptpUtils.so.4 (0xb7f72000)
+      &nbsp;&nbsp; libtptpLogUtils.so.4 =&gt; ../lib/libtptpLogUtils.so.4 (0xb7f65000)
+      &nbsp;&nbsp; libtptpConfig.so.4 =&gt; ../lib/libtptpConfig.so.4 (0xb7f4b000)
+      &nbsp;&nbsp; libprocessControlUtil.so.4 =&gt; ../lib/libprocessControlUtil.so.4 (0xb7f46000)
+      &nbsp;&nbsp; libxerces-c.so.26 =&gt; ../lib/libxerces-c.so.26 (0xb7b3f000)
+      &nbsp;&nbsp; libpthread.so.0 =&gt; /lib/tls/i686/cmov/libpthread.so.0 (0xb7b12000)
+      &nbsp;&nbsp; libc.so.6 =&gt; /lib/tls/i686/cmov/libc.so.6 (0xb79d1000)
+      &nbsp;&nbsp; libdl.so.2 =&gt; /lib/tls/i686/cmov/libdl.so.2 (0xb79cd000)
+      &nbsp;&nbsp; libuuid.so.1 =&gt; /lib/libuuid.so.1 (0xb79ca000)
+      &nbsp;&nbsp; libstdc++-libc6.2-2.so.3 =&gt; /usr/lib/libstdc++-libc6.2-2.so.3 (0xb7982000)
+      &nbsp;&nbsp; libm.so.6 =&gt; /lib/tls/i686/cmov/libm.so.6 (0xb795a000)
+      &nbsp;&nbsp; /lib/ld-linux.so.2 (0xb7f95000)
 
 %p
   If some of these libraries are missing on your system you will have to find and install the corresponding packages. A Good place to start searching for packages is the <a target="_blank" title="Ubuntu Packages Search" href="http://packages.ubuntu.com/" id="w_8e">Ubuntu Packages Search</a>, the <a target="_blank" title="Debian Package Search" href="http://www.debian.org/distrib/packages" id="imvv">Debian Package Search</a>, the <a target="_blank" title="Fedora Package Database" href="https://admin.fedoraproject.org/pkgdb/" id="y6tx">Fedora Package Database</a> or other distribution's package directories.
@@ -139,18 +147,20 @@ tags: [ java, eclipse, tptp, ubuntu ]
 %p
   This problem was the easiest to solve. The Agent Controller complains about the missing environment variable TEMP.
 
-%pre(class="prettyprint nocode")
-  :plain
-    $ ./ACServer
-    The TEMP environment variable does not point to a valid directory.
-    Agent Controller will not start.
+%pre(class="nohighlight")
+  %code
+    :plain
+      $ ./ACServer
+      The TEMP environment variable does not point to a valid directory.
+      Agent Controller will not start.
 
 %p
   As already hinted this problem can be solved easily. Just put this line in your <i>.bashrc</i> file:
 
-%pre(class="prettyprint nocode")
-  :plain
-    export TEMP=/tmp
+%pre(class="nohighlight")
+  %code
+    :plain
+      export TEMP=/tmp
 
 %p
   It should be mentioned that I did not test whether Eclipse takes care of setting this variable for the Agent Controller process. But it does certainly no harm to set it manually.
@@ -161,10 +171,11 @@ tags: [ java, eclipse, tptp, ubuntu ]
 %p
   If you don't stumble across other problems the Agent Controller should now start normally. In this case you won't see any output on the console.
 
-%pre(class="prettyprint nocode")
-  :plain
-    $ ./ACServer
-    &lt;no console output&gt;
+%pre(class="nohighlight")
+  %code
+    :plain
+      $ ./ACServer
+      &lt;no console output&gt;
 
 %p
   Now you can stop the Agent Controller by hitting CTRL+C and retry profiling an application in Eclipse. On my system profiling in Eclipse now worked as expected.

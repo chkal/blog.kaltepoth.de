@@ -30,31 +30,32 @@ tags: [ maven, google ]
   I tried it and it worked. See the site.xml file of <a href="http://www.criteria4jpa.org/">Criteria4JPA</a> for 
   an example:
 
-%pre(class="prettyprint lang-xml")
-  :plain
-    &lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;
-    &lt;project name="Criteria4JPA"&gt;
-    
-      &lt;body&gt;
-    
-        &lt;head&gt;
-          &lt;!-- Google Analytics - Start --&gt;
-          &lt;script type="text/javascript"&gt;
-          var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-          document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-          &lt;/script&gt;
-          &lt;script type="text/javascript"&gt;
-          try {
-          var pageTracker = _gat._getTracker("UA-1234567-8");
-          pageTracker._trackPageview();
-          } catch(err) {}&lt;/script&gt;      
-          &lt;!-- Google Analytics - End --&gt;
-        &lt;/head&gt;
-    
-        &lt;!-- more stuff --&gt;
-    
-      &lt;/body&gt;
-    &lt;/project&gt;
+%pre(class="html")
+  %code
+    :plain
+      &lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;
+      &lt;project name="Criteria4JPA"&gt;
+      
+        &lt;body&gt;
+      
+          &lt;head&gt;
+            &lt;!-- Google Analytics - Start --&gt;
+            &lt;script type="text/javascript"&gt;
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+            &lt;/script&gt;
+            &lt;script type="text/javascript"&gt;
+            try {
+            var pageTracker = _gat._getTracker("UA-1234567-8");
+            pageTracker._trackPageview();
+            } catch(err) {}&lt;/script&gt;      
+            &lt;!-- Google Analytics - End --&gt;
+          &lt;/head&gt;
+      
+          &lt;!-- more stuff --&gt;
+      
+        &lt;/body&gt;
+      &lt;/project&gt;
 
 %p
   As you can see adding the tracking code is very easy. Just place a &lt;head&gt; element inside the body 

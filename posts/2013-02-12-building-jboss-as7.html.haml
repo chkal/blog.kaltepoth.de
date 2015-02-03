@@ -28,18 +28,20 @@ tags: [ jboss, as7 ]
   The first step is of cause to download the sources. Fortunately GitHub provides downloadable 
   ZIP files for all tags. 
 
-%pre(class="prettyprint nocode")
-  :plain
-    $ wget https://github.com/jbossas/jboss-as/archive/7.1.3.Final.zip
-    $ unzip 7.1.3.Final.zip
-    $ cd jboss-as-7.1.3.Final/
+%pre(class="nohighlight")
+  %code
+    :plain
+      $ wget https://github.com/jbossas/jboss-as/archive/7.1.3.Final.zip
+      $ unzip 7.1.3.Final.zip
+      $ cd jboss-as-7.1.3.Final/
 
 %p
   Now you have to start the build by entering this command: 
 
-%pre(class="prettyprint nocode")
-  :plain
-    $ ./build.sh -DskipTests -Drelease=true install
+%pre(class="nohighlight")
+  %code
+    :plain
+      $ ./build.sh -DskipTests -Drelease=true install
 
 %p
   This command requires some explanation. The <code>build.sh</code> file is a helper script that
@@ -51,11 +53,12 @@ tags: [ jboss, as7 ]
   The compilation took about 9 minutes on my box. After the build completed you will find the ZIP distribution
   in the <code>dist/target</code> directory:
 
-%pre(class="prettyprint nocode")
-  :plain
-    $ ls -1 dist/target/*.zip
-    dist/target/jboss-as-7.1.3.Final-src.zip
-    dist/target/jboss-as-7.1.3.Final.zip
+%pre(class="nohighlight")
+  %code
+    :plain
+      $ ls -1 dist/target/*.zip
+      dist/target/jboss-as-7.1.3.Final-src.zip
+      dist/target/jboss-as-7.1.3.Final.zip
 
 %p
   That's all. Simple, isn't it? So you see there is no reason for not building AS7 yourself. :)
