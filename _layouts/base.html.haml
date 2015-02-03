@@ -10,6 +10,8 @@
     %meta{ :name=>'twitter:description', :content=>site.title }
     %link{ :rel=>'stylesheet', :type=>'text/css', :href=>"/vendor/bootstrap/css/bootstrap.min.css" }
     %link{ :rel=>'stylesheet', :type=>'text/css', :href=>"/vendor/highlight/styles/github.css" }
+    %link{ :rel=>'stylesheet', :type=>'text/css', :href=>"/vendor/font-awesome/css/font-awesome.min.css" }
+    %link{ :rel=>'stylesheet', :type=>'text/css', :href=>"/vendor/bootstrap-social/bootstrap-social.css" }
     %link{ :rel=>'stylesheet', :type=>'text/css', :href=>"/stylesheets/styles.css" }
     %link{ :rel=>'alternate', :type=>'application/atom+xml', :href=>"/feed.atom", :title=>'Atom Feed' }
     /[if lt IE 9]
@@ -26,15 +28,25 @@
       .row
         .col-md-8
           ~ content
-        .col-md-4.sidebar
+        .col-md-4.sidebar.text-center
           %h1
             About me
           .picture
             %img{ :src=>'/images/chkal.jpg', :alt=>'picture', :width=>'100' }
           %p.text-center
-            Christian Kaltepoth<br/>
-            Senior Software Developer<br/>
-            <a href="http://www.ingenit.com/">ingenit GmbH & Co. KG</a>
+            .name
+              Christian Kaltepoth<br/>
+              Senior Software Developer<br/>
+              <a href="http://www.ingenit.com/">ingenit GmbH & Co. KG</a>
+            .social
+              %a.btn.btn-social-icon.btn-twitter{ :href=>'https://twitter.com/chkal' }
+                %i.fa.fa-twitter
+              %a.btn.btn-social-icon.btn-google-plus{ :href=>'https://plus.google.com/+ChristianKaltepoth' }
+                %i.fa.fa-google-plus
+              %a.btn.btn-social-icon.btn-github{ :href=>'https://github.com/chkal' }
+                %i.fa.fa-github
+              %a.btn.btn-social-icon.btn-linkedin{ :href=>'https://de.linkedin.com/in/christiankaltepoth' }
+                %i.fa.fa-linkedin
             .ohloh
               %a(href='https://www.ohloh.net/accounts/95468?ref=Detailed' target='_top')
                 %img(alt='Ohloh profile for Christian Kaltepoth' border='0' height='35' src='https://www.ohloh.net/accounts/95468/widgets/account_detailed.gif' width='230')
@@ -45,19 +57,9 @@
               %a(href='http://www.javaland.eu/')
                 %img{ :src=>'/images/javaland15.jpg', :alt=>'javaland15' }
           %h1
-            Contact
-          %p
-            %ul
-              %li
-                Twitter: <a href="http://twitter.com/chkal">@chkal</a>
-              %li
-                Google+: <a href="https://plus.google.com/105317683054583400251?rel=author">chkal</a>
-              %li
-                GitHub: <a href="https://github.com/chkal">chkal</a>
-          %h1
             Projects
           %p
-            %ul
+            %ul.text-left
               %li
                 <a href="http://www.togglz.org/">Togglz</a> - Feature Flags for Java
               %li
