@@ -1,6 +1,6 @@
 language: ruby
 install:
-  - gem install awestruct therubyracer less
+  - gem install awestruct therubyracer less redcarpet
 script:
   - awestruct -P production
 deploy:
