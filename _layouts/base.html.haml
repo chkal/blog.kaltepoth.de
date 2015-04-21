@@ -50,12 +50,12 @@
             .openhub
               %a{ :href=>'https://www.openhub.net/accounts/95468?ref=Detailed', :target=>'_blank' }
                 %img{ :alt=>'Open Hub profile for Christian Kaltepoth', :border=>'0', :height=>'35', :src=>'https://www.openhub.net/accounts/95468/widgets/account_detailed.gif', :width=>'230' }
-          %h1
-            Upcoming Conferences
-          %p
-            .picture
-              %a(href='http://www.javaland.eu/')
-                %img{ :src=>'/images/javaland15.jpg', :alt=>'javaland15' }
+          -#%h1
+            -#Upcoming Conferences
+          -#%p
+            -#.picture
+              -#%a(href='http://www.javaland.eu/')
+                -#%img{ :src=>'/images/javaland15.jpg', :alt=>'javaland15' }
           %h1
             Projects
           %p
@@ -74,13 +74,16 @@
             Past Conferences
           %p
             .picture
+              %a(href='http://www.javaland.eu/')
+                %img{ :src=>'/images/javaland15.jpg', :alt=>'javaland15' }
+            .picture
               %a(href='http://jax.de/')
                 %img{ :src=>'/images/wjax13.gif', :alt=>'wjax13' }
               %a(href='http://jax.de/')
                 %img{ :src=>'/images/jax13.jpg', :alt=>'jax13' }
             .picture
               %a(href='http://www.gearconf.de/')
-                %img{ :src=>'/images/gearconf12.png', :alt=>'gearconf12', 
+                %img{ :src=>'/images/gearconf12.png', :alt=>'gearconf12',
                   :style=>'width: 250px; margin-top: 10px;' }
           %h1
             Feeds
@@ -96,4 +99,3 @@
     %script{ :type=>'text/javascript', :src=>"/vendor/highlight/highlight.pack.js" }
     %script{ :type=>'text/javascript' }
       hljs.initHighlightingOnLoad();
-    
