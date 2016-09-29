@@ -10,7 +10,7 @@ which was created to gather feedback about what developers want to see
 Java EE 8. One of the questions in the survey was whether people would like to see
 a MVC web framework alongside with JSF in Java EE 8.
 [The result](https://java.net/downloads/javaee-spec/JavaEE8_Community_Survey_Results.pdf)
-was clear. Over 60% of the participates voted "Yes". As a result
+was clear. Over 60% of the participants voted "Yes". As a result
 [JSR 371 (MVC 1.0)](https://jcp.org/en/jsr/detail?id=371) was started
 to work on the new action-based web framwork for Java EE.
 
