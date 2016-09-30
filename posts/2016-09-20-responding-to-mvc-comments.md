@@ -17,8 +17,6 @@ to work on the new action-based web framwork for Java EE.
 Fast forward to 2016. JSR 371 has been doing well. The EG released the
 second early draft review and got a lot of positive feedback. The JSR was moving
 forward even after Oracle suddenly stopped all work on the Java EE JSRs.
-A strong indicator that MVC is relevant and highly required by the Java
-community.
 
 Last week Oracle announced the revised plan for Java EE 8 during JavaOne 2016.
 Surprisingly they now question whether an action-based MVC web-framwork is
@@ -46,7 +44,8 @@ them:
 
 **Comment: Modern web applications use stateless REST services anyway.**
 
-It's true, that JavaScript based web frameworks like AngularJS, React, vue.js
+It's true, that JavaScript based web frameworks like [AngularJS](https://angular.io/),
+[React](https://facebook.github.io/react/), [Vue.js](https://vuejs.org/)
 and friends are very popular today. Writing single page applications (SPAs)
 which run completely in the browser and get their data from REST backend
 services has many advantages, especially in regard to usability and scalability.
@@ -62,7 +61,7 @@ If your application is not highly interactive and if you have to deal with
 SEO requirements, a server-rendered web framework may be your best choice.
 
 Searching for silver bullets seems to be a common phenomenon in our
-industry. Some people for example seem to think that NoSQL databases like
+industry. Some people seem to think for example that NoSQL databases like
 MongoDB, Redis, Cassandra and others are the silver bullet for storing data.
 No, they aren't. There are many use cases for which MongoDB is a great fit,
 but depending on your specific requirements a classic relational database
@@ -73,6 +72,13 @@ in Java EE which implements a completely different concept than JSF. Neither
 of the two frameworks is right or wrong. They are different. So you can
 use Angular + JAX-RS, classic JSF or the new MVC framework depending
 on your needs. Having a choice is a good thing.
+
+BTW: Of cause you can use JavaScript frameworks like AngularJS and React
+together with MVC. This technology stack is a great mix. You can even
+use MVC to render React applications on the server. Don't believe me? Just
+have a look at this awesome proof of concept of a
+[React ViewEngine](https://github.com/dasniko/ozark-react) created by
+[Niko Köbler](https://twitter.com/dasniko).
 
 **Comment: The same can be achieved with JAX-RS**
 
