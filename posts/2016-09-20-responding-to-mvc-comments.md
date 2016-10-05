@@ -6,11 +6,11 @@ tags: [ mvc, javaee, javaone ]
 ---
 
 Back in early 2014 Oracle released the results of the Java EE community survey
-which was created to gather feedback about what developers want to see
+which was created to gather feedback about what developers want to see in
 Java EE 8. One of the questions in the survey was whether people would like to see
 a MVC web framework alongside with JSF in Java EE 8.
 [The result](https://java.net/downloads/javaee-spec/JavaEE8_Community_Survey_Results.pdf)
-was clear. Over 60% of the participants voted "Yes". As a result
+was pretty clear. Over 60% of the participants voted "Yes". As a result
 [JSR 371 (MVC 1.0)](https://jcp.org/en/jsr/detail?id=371) was started
 to work on the new action-based web framwork for Java EE.
 
@@ -18,10 +18,10 @@ Fast forward to 2016. JSR 371 has been doing well. The EG released the
 second early draft review and got a lot of positive feedback. The JSR was moving
 forward even after Oracle suddenly stopped all work on the Java EE JSRs.
 
-Last week Oracle announced the revised plan for Java EE 8 during JavaOne 2016.
-Surprisingly they now question whether an action-based MVC web-framwork is
-still relevant in the cloud age and therefore proposed to drop MVC 1.0.
-At the same time Oracle just started a [new survey](https://glassfish.java.net/survey/)
+Recently Oracle announced the revised plan for Java EE 8 during JavaOne 2016.
+Surprisingly Oracle now questions whether an action-based MVC web-framwork is
+still relevant in the cloud age and therefore proposes to drop MVC 1.0.
+At the same time Oracle started a [new survey](https://glassfish.java.net/survey/)
 to get feedback about the revised plan for Java EE 8. This survey contains the
 following statement:
 
@@ -44,7 +44,7 @@ them:
 
 **Comment: Modern web applications use stateless REST services anyway.**
 
-It's true, that JavaScript based web frameworks like [AngularJS](https://angular.io/),
+It's true that JavaScript based web frameworks like [AngularJS](https://angular.io/),
 [React](https://facebook.github.io/react/), [Vue.js](https://vuejs.org/)
 and friends are very popular today. Writing single page applications (SPAs)
 which run completely in the browser and get their data from REST backend
@@ -55,10 +55,11 @@ learned that there is no silver bullet. Never. Developers created various
 web application frameworks for decades. And guess what, nobody ever created
 a framework which solves all your problems. That's why there are so many of
 them. There is no "right" and "wrong" approach for web frameworks. There are
-different categories which address different problem domains. You have to
-choose the right tool for your specific requirements.
+different categories of frameworks which address different problem domains.
+You have to choose the right tool for your specific requirements.
 If your application is not highly interactive and if you have to deal with
 SEO requirements, a server-rendered web framework may be your best choice.
+An in this case MVC 1.0 will be a great option.
 
 Searching for silver bullets seems to be a common phenomenon in our
 industry. Some people seem to think for example that NoSQL databases like
@@ -76,7 +77,7 @@ on your needs. Having a choice is a good thing.
 BTW: Of cause you can use JavaScript frameworks like AngularJS and React
 together with MVC. This technology stack is a great mix. You can even
 use MVC to render React applications on the server. Don't believe me? Just
-have a look at this awesome proof of concept of a
+have a look at this awesome proof of concept for a
 [React ViewEngine](https://github.com/dasniko/ozark-react) created by
 [Niko Köbler](https://twitter.com/dasniko).
 
@@ -97,8 +98,8 @@ Well, dropping JSF would be a REALLY bad idea. Backward compatibility is a key
 feature of the Java EE platform. If you invested in JSF by building
 applications using it, your investment will be safe. Future versions of the
 platform will keep supporting JSF for the foreseeable future. And that's great,
-unless you boss allows you to migrate your application to a new web framework
-every few months. But I guess that's not the case. ;-)
+unless your boss allows you to migrate your application to a new shiny web framework
+every month. But I guess that's not the case. ;-)
 
 If MVC 1.0 gets included in Java EE 8, you will have the choice between
 two web frameworks. And that's great. Ed Burns wrote a
@@ -108,8 +109,8 @@ is that component oriented and action based web frameworks are completely
 different concepts and both have their right to exist. Why? Remember, there
 is no silver bullet. You should use the framework which best fits your needs.
 The same is true for other technologies. If you want to process XML, you can
-either use low level APIs like DOM/SAX/StAX or you could use a mapper like
-JAXB. Which one to choose depends on your specific needs.
+either use low level APIs like DOM/SAX/StAX or you could use an object mapper
+like JAXB. Which one to choose depends on your specific situation.
 
 **Comment: I think it missed the train and now comes too late.**
 
@@ -118,9 +119,9 @@ that are proven to work good in practice. Therefore creating a JSR to standarize
 well established concepts can never be too late.
 
 JPA is a very good example for this. Prior to EJB 3.0, persistence in Java EE
-was a very heavy weight approach which produced a lot of overhead. Most
-developers weren't happy with it. That's why people preferred 3rd party
-solutions like Hibernate. So Hibernate became a de-facto standard for ORM in Java.
+was a very heavy weight approach. Most developers weren't happy with
+it. That's why people preferred 3rd party solutions like [Hibernate](http://hibernate.org/).
+So Hibernate became a de-facto standard for ORM in Java.
 The JPA specification then created a standard which was heavily influenced by
 Hibernate. Which is a good thing. Remember that standardization should focus
 on technology that is battle tested and works good in practice. So did JPA
@@ -132,24 +133,24 @@ The most popular MVC framework in the Java space is Spring MVC. That's
 why MVC 1.0 is heavily influenced by Spring MVC. Some people criticize that
 MVC 1.0 copies Spring MVC too much. But these people don't understand that
 using concepts from well established frameworks for standardization is a good
-thing.
+thing. Standards should look at the best technologies out there.
 
 **Comment: Happy with Spring MVC :-)**
 
 Hey, you are using Spring MVC? That's great! Spring MVC is awesome! If you
-are happy with it, there is almost no good reason to migrate your apps to MVC 1.0.
-However, if you are creating a new application with there Java EE platform,
+are happy with it, there is no good reason to migrate your apps to MVC 1.0.
+However, if you are creating a new application on the Java EE platform,
 using MVC 1.0 which ships with your container may be an interesting option. Especially
 if you are using Java EE technologies like CDI, JAX-RS, Bean Validation and
 friends. In this case including Spring into your project just to get the
-web framework part is not required any more. But if you are typically using
-the Spring framework and many other components of the Spring ecosystem,
+web framework wouldn't make any sense. But if you are typically using
+the Spring framework and other components of the Spring ecosystem,
 you should definitely go with Spring MVC.
 
 **Comment: Too late. Enhance JAX-RS.**
 
 Back then, before JSR 371 (MVC 1.0) was started, there were quite some
-discussion whether MVC web framework support should be added to JAX-RS or
+discussions whether web framework support should be added to JAX-RS directly or
 if a separate specification would make more sense. At that time the
 JAX-RS EG decided that adding web framework related concepts to the core
 JAX-RS API would not be a good idea. So a separate JSR was created. However,
