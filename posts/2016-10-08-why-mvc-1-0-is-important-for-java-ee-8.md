@@ -1,5 +1,5 @@
 ---
-title: "Responding to MVC comments from the DZone Java EE survey"
+title: "Why MVC 1.0 is important for Java EE 8"
 author: "Christian Kaltepoth"
 layout: post
 tags: [ mvc, javaee, javaone ]
