@@ -3,11 +3,12 @@ install:
   - gem install awestruct therubyracer less redcarpet
 script:
   - awestruct -P production
+before_deploy:
+  - npm i netlify-cli
 deploy:
   provider: script
   skip_cleanup: true
   script:
-    - npm i netlify-cli
     - node_modules/.bin/netlify -s blog-kaltepoth-de -t $ACCESS_TOKEN -p _site
   on:
     repo: chkal/blog.kaltepoth.de
