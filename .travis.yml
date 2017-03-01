@@ -9,7 +9,7 @@ deploy:
   provider: script
   skip_cleanup: true
   script:
-    - node_modules/.bin/netlify -s blog-kaltepoth-de -t $ACCESS_TOKEN -p _site
+    - node_modules/.bin/netlify deploy -s blog-kaltepoth-de -t $ACCESS_TOKEN -p _site
   on:
     repo: chkal/blog.kaltepoth.de
     branch: master
